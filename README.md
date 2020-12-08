@@ -14,14 +14,14 @@ If you want to try using this website, you need to have SQL server management su
 + The project has not been finished yet
 + **"EcommerceProject.sql"** file is updataed every database update, so make sure to run the file on the database to get the updated.
 
-<img src="Work Yasser/imge/I1.png" width="750">
-<img src="Work Yasser/imge/I2.png" width="750">
-<img src="Work Yasser/imge/I3.png" width="750">
-<img src="Work Yasser/imge/I4.png" width="750">
-<img src="Work Yasser/imge/I5.png" width="750">
-<img src="Work Yasser/imge/I6.png" width="750">
-<img src="Work Yasser/imge/I7.png" width="750">
-<img src="Work Yasser/imge/I8.png" width="720">
-<img src="Work Yasser/imge/I9.png" width="720">
-<img src="Work Yasser/imge/I10.png" width="720">
+<img src="imge/I1.png" width="750">
+<img src="imge/I2.png" width="750">
+<img src="imge/I3.png" width="750">
+<img src="imge/I4.png" width="750">
+<img src="imge/I5.png" width="750">
+<img src="imge/I6.png" width="750">
+<img src="imge/I7.png" width="750">
+<img src="imge/I8.png" width="720">
+<img src="imge/I9.png" width="720">
+<img src="imge/I10.png" width="720">
 
