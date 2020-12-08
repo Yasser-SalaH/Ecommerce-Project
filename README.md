@@ -18,5 +18,5 @@ If you want to try using this website, you need to have SQL server management su
 + The project has not been finished yet
 + "EcommerceProject.sql" file is updataed every database update, so make sure to run the file on the database to get the updated.
 
-Inline-style: E:\Work Yasser\imge
+http://E:\Work Yasser\imge\I1.png
 
