@@ -23,5 +23,5 @@ If you want to try using this website, you need to have SQL server management su
 <img src="imge/I7.png" width="750">
 <img src="imge/I8.png" width="720">
 <img src="imge/I9.png" width="720">
-<img src="imge/I10.png" width="720">
+<img src="../imge/I10.png" width="720">
 
