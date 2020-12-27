@@ -1,0 +1,33 @@
+﻿@model List<E_commerce_Project.Models.Order>
+
+<h2>Order</h2>
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>OrderNumber</th>
+                    <th>OrderDate</th>
+                    <th>Total price</th>
+                    <th>UserEmail</th>
+                    <th> </th>
+
+                </tr>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.OrderNumber</td>
+                        <td>@item.OrderDate</td>
+                        <td>@item.TotalPrice</td>
+                        <td>@item.User.Email</td>
+                        <td><button><a href="~/Admin/OrderDetailes/Index/@item.ID " class="btn btn-primary">Details</a></button></td>
+
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

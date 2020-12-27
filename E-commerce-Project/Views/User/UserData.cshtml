@@ -1,0 +1,32 @@
+﻿@model E_commerce_Project.Models.User
+@if (Model == null)
+{
+    <div class="alert alert-danger">
+        <label>You Must Login Frist </label>
+        <div>
+            <a href="/Home/Index" class="btn btn-success">login</a>
+        </div>
+    </div>
+}
+else
+{
+    <brline> 
+    <div>
+        <label>Name:@Model.Name</label>
+    </div>
+    <div>
+        <label>Email:@Model.Email</label>
+    </div>
+    <div>
+        <label>phone:@Model.Phone</label>
+    </div>
+    <div>
+        <label>Password:@Model.Password</label>
+    </div>
+    <div>
+        <label>Address:@Model.Address</label>
+    </div>
+   </brline>
+}
+
+

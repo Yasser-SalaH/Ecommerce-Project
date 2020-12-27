@@ -1,0 +1,54 @@
+﻿@model List<E_commerce_Project.Models.OrderDetails>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+    var Data = new E_commerce_Project.Models.EcommerceProjectEntities().Order.ToList();
+}
+
+<h2>Index</h2>
+<ul>
+    @* User Details*@
+    <li> UserName :      @Model.Select(z => z.User.Name).FirstOrDefault()</li>
+    <li> UserPhone:      @Model.Select(z => z.User.Phone).FirstOrDefault()</li>
+
+    @* Order *@
+    <li> OrderNumber:      @Model.Select(z => z.Order.OrderNumber).FirstOrDefault() </li>
+    <li> OrderDate:      @Model.Select(z => z.Order.OrderDate).FirstOrDefault()  </li>
+    <li> Total Price:      @Model.Select(z => z.Order.TotalPrice).FirstOrDefault()  </li>
+    <li> UserAdress:      @Model.Select(z => z.Order.UserAddress.Address).FirstOrDefault()  </li>
+</ul>
+
+@*OrderDetails*@
+<div class="container">
+    <div class="row">
+        <table class=" table table-bordered">
+            <thead>
+                <tr>
+                    <th>Price</th>
+                    <th>Total price</th>
+                    <th>Quantity</th>
+                    <th>Product Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Price</td>
+                        <td>@item.TotalPrice</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Product.Name</td>
+
+
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+

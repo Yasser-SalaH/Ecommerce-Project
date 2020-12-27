@@ -1,0 +1,93 @@
+﻿@model List<E_commerce_Project.Models.Brand>
+    <div>
+        @if (Model.Any())
+        {
+            <div class="row">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>UpdatedBy</th>
+                            <th>UpdatedDate</th>
+                            <th>CreationDate</th>
+                            <th>CreatedBy</th>
+                            <th>Prossec</th>
+                        </tr>
+                    </thead>
+
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.Name</td>
+                                <td><img src=" @item.Image" alt="@item.Name" width="100px" /></td>
+                                <td>@item.UpdatedBy</td>
+                                <td>@item.UpdatedDate</td>
+                                <td>@item.CreationDate</td>
+                                <td>@item.CreatedBy</td>
+                                <td>
+                                    <button class="btn btn-warning" onclick="DetailesBrand(@item.ID)">Detalis</button>
+                                    <button class="btn btn-info" onclick="EditBrand(@item.ID)">Edit</button>
+                                    <button class="btn btn-danger" onclick="DeleteBrand(@item.ID)">Delete</button>
+                                    <button class="btn btn-xs" onclick="Uploadimage(@item.ID)">Upload Image</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-danger">No Data</div>
+        }
+    </div>
+<script>
+   function  DetailesBrand(id) {
+        $.ajax({
+            url: '/Admin/Brand/DetailesBrand',
+            type: 'Get',
+            data: {
+                id: id
+            }
+
+        }).done(function (data) {
+            $('#Brandform').html(data);
+            $('#form0 input').attr('disabled', true);
+        }).fail(function (data) {
+
+        });
+   }
+    function  EditBrand(id) {
+        $.ajax({
+            url: '/Admin/Brand/EditBrand',
+            type: 'Get',
+            data: {
+                id: id
+            }
+
+        }).done(function (data) {
+            $('#Brandform').html(data);
+        }).fail(function (data) {
+            $('.alert').html('error in Save')
+
+        });
+    }
+    function DeleteBrand(id) {
+        $.ajax({
+            url: '/Admin/Brand/DeleteBrand',
+            type: 'Get',
+            data: {
+                id: id
+            }
+
+        }).done(function (data) {
+            LoadData();
+        }).fail(function (data) {
+            $('.alert').html('error in Delete');
+
+        });
+    }
+</script>

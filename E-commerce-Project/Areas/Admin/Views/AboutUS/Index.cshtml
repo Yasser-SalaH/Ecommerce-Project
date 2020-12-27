@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Index</h2>
+<div class="alert"></div>
+<section>
+    <div id="FormAbout">
+        @Html.Action("AddAbout")
+    </div>
+</section>
+<section>
+    <div id="GetAll">
+        @Html.Action("ShowAbout")
+    </div>
+</section>
+
+<script>
+    function onsuccess(data) {
+        if (data.done) {
+            LoadData();
+            Clear();
+        }
+        else {
+            alert="error"
+        }
+    }
+    function onfailure(data) {
+       toastr.error("Error");
+    }
+    function Clear() {
+        $('#form0')[0].reset();
+    }
+    function LoadData() {
+        $.ajax({
+            url: '/Admin/AboutUS/ShowAbout',
+            type: 'Get'
+        }).done(function (data) {
+            $("#GetAll").html(data);
+        }).fail(function (data) {
+            $('.alert').html('error in save');
+        })
+    }
+</script>

@@ -1,0 +1,16 @@
+﻿@model E_commerce_Project.ViewModel.TestiMonialsVM
+@{
+    string FormName = ViewBag.FormName;
+}
+@using(Ajax.BeginForm(FormName,new AjaxOptions { OnSuccess="OnSuccess",OnFailure="OnFailure"}))
+{
+
+    <div class="form-group">
+        @Html.LabelFor(z => z.FeedBack)
+        @Html.TextBoxFor(z => z.FeedBack, new { placeholder = "Enter FeedBack", @class = "form-control" })
+        @Html.ValidationMessageFor(z => z.FeedBack)
+    </div>
+    <div class="btn btn-success">
+        <button type="submit" class="btn btn-success"> Add Feedback</button>
+    </div>
+}

@@ -1,0 +1,85 @@
+﻿@model List<E_commerce_Project.Models.Color>
+
+    <div class="container">
+        @if (Model.Any())
+        {
+            <div class="row">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>CreationDate</th>
+                            <th>CreatedBy</th>
+                            <th>UpdatedBy</th>
+                            <th>UpdatedDate</th>
+                            <th>Proccess</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @foreach (var item in Model)
+                        {
+                          <tr>
+                             <td>@item.Name</td>
+                            <td>@item.Code</td>
+                            <td>@item.CreationDate</td>
+                            <td>@item.CreatedBy</td>
+                            <td>@item.UpdatedBy</td>
+                            <td>@item.UpdatedDate</td>
+                            <td>
+                                <button class="btn btn-warning" onclick="DetailesColor(@item.ID)">Detalis</button>
+                                <button class="btn btn-info" onclick="EditColor(@item.ID)">Edit</button>
+                                <button class="btn btn-danger" onclick="DeleteColor(@item.ID)">Delete</button>
+                            </td>
+                          </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">No Data</div>
+        }
+    </div>
+       <script>
+           function DetailesColor(id) {
+               $.ajax({
+                   url: '/Admin/Color/DetailesColor',
+                   type: 'Get',
+                   data: {
+                       id:id
+                   }
+               }).done(function (data) {
+                   $('#ColorForm').html(data);
+                   $('#form0 input').attr('disabled', true);
+               }).fail(function (data) {
+               })
+           }
+           function EditColor(id) {
+               $.ajax({
+                   url: '/Admin/Color/EditColor',
+                   type: 'Get',
+                   data: {
+                       id:id
+                   }
+               }).done(function (data) {
+                   $('#ColorForm').html(data);
+               }).fail(function (data) {
+                   $('.alert').html('error in Save');
+               })
+           }
+           function DeleteColor(id) {
+               $.ajax({
+                   url: '/Admin/Color/DeleteColor',
+                   type: 'Get',
+                   data: {
+                       id:id
+                   }
+               }).done(function (data) {
+                   LoadData();
+               }).fail(function (data) {
+                   $('.alert').html('error in Deleted');
+               })
+           }
+       </script>

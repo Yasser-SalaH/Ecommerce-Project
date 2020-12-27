@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Product</h2>
+<section>
+    <div class="alert" id="ProductForm">
+        @Html.Action("AddProduct")
+    </div>
+</section>
+<section>
+    <div class="alert" id="ProductData">
+        @Html.Action("ProductData")
+    </div>
+</section>
+<div class="modal" id="Uploadimage">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Upload Image</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Modal body..
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function onsuccess(data) {
+        if (data.done) {
+            LoadData();
+            Clear();
+        }
+        else {
+            alert("Error");
+        }
+        Clear();
+    }
+    function onfailure() {
+        toastr.error("Error");
+    }
+    function Clear() {
+        $("#form0")[0].reset();
+    }
+    function LoadData() {
+        $.ajax({
+            url: 'Admin/Product/ProductData',
+            type: 'Get',
+        }).done(function (data) {
+            $('#ProductData').html(data);
+        }).fail(function (data) {
+            $('.alert').html('error in save');
+        });
+        $('#CatFK').change(function () {
+            BindSubCat();
+        });
+    }
+    function BindSubCat() {
+        $.ajax({
+            url: "Admin/Product/GetSubCats",
+            method: "Get",
+            data: {
+                id: $('#CatFK').val()
+            }
+        }).done(function (data) {
+            var rows = "";
+            $.each(data, function (i, item) {
+                rows += '<option value = "' + item.ID + '">' + item.Name + '</option>'
+            })
+            $('#SubCatFK').html(rows)
+        }).fail(function (data) {
+
+        });
+    }
+    function Uploadimage(id) {
+        $.ajax({
+            url: '/Admin/Product/Uploadimage',
+            type: 'Get',
+            data: {
+                productID: id
+            }
+        }).done(function (data) {
+            $('#Uploadimage .modal-body').html(data);
+            $('#Uploadimage').modal('show');
+        }).fail(function (data) {
+            $('.alert').html('error in Save')
+        });
+       }
+</script>

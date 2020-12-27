@@ -1,0 +1,21 @@
+﻿@model E_commerce_Project.ViewModel.UserVM
+    <label>Login</label>
+<div>
+    @using (Ajax.BeginForm("login", "Register",
+        new AjaxOptions { OnSuccess = "onsuccess", OnFailure = "onfailure" }))
+    {
+        <div>
+            @Html.LabelFor(z => z.Email)
+            @Html.TextBoxFor(z => z.Email, new { palceholder="Enter Email",@class="form-control"})
+            @Html.ValidationMessageFor(z=>z.Email)
+        </div>
+        <div>
+            @Html.LabelFor(z => z.Password)
+            @Html.TextBoxFor(z => z.Password, new {Type="Password", palceholder = "Enter Password", @class = "form-control" })
+            @Html.ValidationMessageFor(z => z.Password)
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success">Login</button>
+        </div>
+    }
+</div>

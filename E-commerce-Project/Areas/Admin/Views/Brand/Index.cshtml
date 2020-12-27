@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+<h2>Brand Data</h2>
+<div class="alert"></div>
+<section>
+    <div class="alert" id="Brandform">
+        @Html.Action("AddBrand")
+    </div>
+</section>
+<section>
+<div id="BrandData">
+    @Html.Action("BrandData")
+</div>
+    
+</section>
+<div class="modal" id="Uploadimage">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Upload Image</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    function onsuccess(data) {
+        if (data.done) {
+            LoadData();
+            Clear();
+        }
+         else {
+        alert("error");
+    }
+    }
+    function onfailure() {
+        toastr.error("Error");
+    }
+    function Clear() {
+        $("#form0")[0].reset();
+    }
+    function LoadData() {
+        $.ajax({
+            url: '/Admin/Brand/BrandData',
+            type: 'Get',
+        }).done(function (data) {
+            $('#BrandData').html(data);
+        }).fail(function (data) {
+            $('.alert').html('error in save');
+        });
+    }
+    function Uploadimage(id) {
+        $.ajax({
+            url: '/Admin/Brand/Uploadimage',
+            type: 'Get',
+            data: {
+                BrandID: id
+            }
+        }).done(function (data) {
+            $('#Uploadimage .modal-body').html(data);
+            $('#Uploadimage').modal('show');
+        }).fail(function (data) {
+            $('.alert').html('error in Save')
+        });
+    }
+</script>

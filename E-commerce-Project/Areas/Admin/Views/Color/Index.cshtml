@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Color Data</h2>
+<section>
+    <div id="ColorForm">
+        @Html.Action("AddColor")
+    </div>
+</section>
+<section>
+    <div class="alert" id="ColorData">
+        @Html.Action("ColorData")
+    </div>
+</section>
+<script>
+    function onsuccess(data) {
+        if (data.done) {
+            LoadData();
+            Clear();
+        }
+    }
+    function onfailure(data) {
+        toastr.error("Error");
+    }
+    function Clear() {
+        $('#form0')[0].reset();
+    }
+    function LoadData() {
+        $.ajax({
+            url: '/Admin/Color/ColorData',
+            type: 'Get',
+        }).done(function (data) {
+            $('#ColorData').html(data);
+        }).fail(function () {
+            $('.alert').html('error in save');
+        })
+    }
+</script>

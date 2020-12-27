@@ -1,0 +1,38 @@
+﻿@model E_commerce_Project.ViewModel.ColorVM
+@{
+    string FormName = ViewBag.FormName;
+}
+@using (Ajax.BeginForm(FormName,
+    new AjaxOptions { OnSuccess = "onsuccess", OnFailure = "onfailure" }))
+{
+    <div class="container">
+        <div class="row">
+            <div class="form-group">
+                @Html.LabelFor(z => z.Name)
+                @Html.TextBoxFor(z => z.Name, new { placeholder = "Enter Color Name", @class = "form-control" })
+                @Html.ValidationMessageFor(z => z.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(z => z.Code)
+                @Html.TextBoxFor(z => z.Code, new { placeholder = "Enter Code Color", @class = "form-control" })
+                @Html.ValidationMessageFor(z => z.Code)
+            </div>
+        </div>
+    </div>
+    if (FormName == "PostColor")
+    {
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="reset" class="btn btn-group-sm">Clear</button>
+    }
+    if (FormName == "EditColor")
+    {
+        @Html.HiddenFor(z => z.ID)
+        @Html.HiddenFor(z => z.CreatedBy)
+        @Html.HiddenFor(z => z.CreationDate)
+    }
+    if (FormName == "EditColor")
+    {
+        <button type="submit" class="btn btn-info">Edit</button>
+    }
+
+}

@@ -1,0 +1,92 @@
+﻿@model List<E_commerce_Project.Models.ContactUs>
+@{
+    ViewBag.Title = "ContactUSData";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>ContactUS Details</h2>
+@if (Model.Any())
+{
+    <div class="container">
+        <div class="row">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>facebook</th>
+                        <th>phone</th>
+                        <th>address</th>
+                        <th>createdBy</th>
+                        <th>CreationData</th>
+                        <th>UpdateBy</th>
+                        <th>UpdateData</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td> @item.Email</td>
+                            <td>@item.facebook</td>
+                            <td>@item.phone</td>
+                            <td>@item.address</td>
+                            <td>@item.CreatedBy</td>
+                            <td>@item.CreationDate</td>
+                            <td>@item.UpdatedBy</td>
+                            <td>@item.UpdatedDate</td>
+                            <td>
+                                <button class="btn btn-warning" onclick="DetailesUS(@item.ID)">Detalis</button>
+                                <button class="btn btn-info" onclick="EditUS(@item.ID)">Edit</button>
+                                <button class="btn btn-danger" onclick="DeleteUS(@item.ID)">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                </table>
+        </div>
+    </div>
+
+}
+else
+{
+    <div class="alert alert-danger">No Data</div>
+}
+<script>
+    function DetailesUS(id) {
+        $.ajax({
+            url: "/Admin/ContactUs/DetailesUS",
+            type: 'Get',
+            data: { id: id }
+        }).done(function (data) {
+            $('#FormContactUS').html(data);
+            $('#form0 input').attr('disabled', true)
+        }).fail(function (data) {
+
+        })
+    }
+    function EditUS(id) {
+        $.ajax({
+            url: '/Admin/ContactUs/EditUS',
+            type: 'Get',
+            data: { id: id }
+        }).done(function (data) {
+            $('#FormContactUS').html(data);
+        }).fail(function (data) {
+           $('.alert').html('error in Edit');
+        })
+    }
+    function DeleteUS(id) {
+        $.ajax({
+            url: '/Admin/ContactUs/DeleteUS',
+            type: 'Get',
+            data: {
+                id: id
+            }
+        }).done(function (data) {
+            LoadData();
+        }).fail(function (data) {
+            $('.alert').html('error in Delet');
+        });
+    }
+</script>

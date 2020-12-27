@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+    <h2>Category Data</h2>
+    <div class="row" id="CategoryForm">
+        @Html.Action("AddCategory")
+    </div>
+<div id="CategoryData">
+    @Html.Action("CategoryData")
+</div>
+<script>
+    function onsuccess(data) {
+        if (data.done) {
+            LoadData();
+            Clear();
+        }
+        else {
+            alert('ERRoR');
+        }
+
+        function onfailure(data) {
+        toastr.error("Error");
+        }
+        function Clear() {
+            $('#form0')[0].reset()
+        }
+
+    }
+    function LoadData() {
+        $.ajax({
+            url: '/Admin/Category/CategoryData/',
+            type: 'Get',
+        }).done(function (data) {
+            $('#CategoryData').html(data);
+        }).fail(function (data) {
+           $('.alert').html('error in save');
+        })
+    }
+</script>

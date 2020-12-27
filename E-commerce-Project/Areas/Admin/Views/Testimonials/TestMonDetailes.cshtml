@@ -1,0 +1,39 @@
+﻿@model List<E_commerce_Project.Models.TestMonials>
+    @if (Model.Any())
+    {
+        <div class="container">
+            <div class="row">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>IsConfirm</th>
+                            <th>FeedBack</th>
+                            <td>User Name</td>
+                            <td>CreatedBy</td>
+                            <td>CreationDate</td>
+                            <td>UpdateBy</td>
+                            <td>UpdateDate</td>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.IsConfirm</td>
+                                <td>@item.FeedBack</td>
+                                <td>@item.UserFK</td>
+                                <td>@item.CreatedBy</td>
+                                <td>@item.CreationDate</td>
+                                <td>@item.UpdateBy</td>
+                                <td>@item.UpdateDate</td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    }
+else
+	{
+	            <div class="alert alert-dark">No Data</div>
+	}

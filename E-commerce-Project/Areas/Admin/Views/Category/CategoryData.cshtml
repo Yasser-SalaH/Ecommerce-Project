@@ -1,0 +1,78 @@
+﻿@model List<E_commerce_Project.Models.Category>
+    <div class="container">
+        <div class="row">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>UpdatedBy</th>
+                        <th>UpdatedDate</th>
+                        <th>CreatedBy</th>
+                        <th>CreationDate</th>
+                        <th>Process</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.UpdatedBy</td>
+                            <td>@item.UpdatedDate</td>
+                            <td>@item.CreatedBy</td>
+                            <td>@item.CreationDate</td>
+                            <td>
+                                <button class="btn btn-warning" onclick="DetailesCategory(@item.ID)">Detalis</button>
+                                <button class="btn btn-info" onclick="EditCategory(@item.ID)">Edit</button>
+                                <button class="btn btn-danger" onclick="DeleteCategory(@item.ID)">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+<script>
+    function DetailesCategory(id) {
+        $.ajax({
+            url: '/Admin/Category/DetailsCategory',
+            type:'Get',
+            data: {
+                id: id
+            }
+        }).done(function (data) {
+            $('#CategoryForm').html(data)
+            $('#form0 input').attr('disabled', true)
+             
+        }).fail(function (data) {
+
+        });
+    }
+     function DeleteCategory(id) {
+        $.ajax({
+            url: '/Admin/Category/DeleteCategory',
+            type: 'Get',
+            data: {
+                id: id
+                }
+            }).done(function (data) {
+               LoadData();
+            }).fail(function () {
+           $('.alert').html('error in Delete');
+            });
+        }
+    function EditCategory(id) {
+        $.ajax({
+            url: '/Admin/Category/EditCategory',
+            type: 'Get',
+            data: {
+                id: id
+                }
+            }).done(function (data) {
+                $('#CategoryForm').html(data);
+            }).fail(function (data) {
+           $('.alert').html('error in Edit');
+            });
+    }
+    
+</script>

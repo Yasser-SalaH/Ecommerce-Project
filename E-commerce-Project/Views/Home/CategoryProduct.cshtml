@@ -1,0 +1,44 @@
+﻿@model List<E_commerce_Project.Models.Product>
+    @if (Model.Any())
+    {
+<section class="top-categorey">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div class="categ-title">
+                        <h6 class="m-0">@item.Category.Name</h6>
+                    </div>
+                    <div class="categ1 owl-carousel owl-theme">
+                        <!--item1-->
+                        <div class="item">
+                            <div class="categ my-3">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="top-categ-img pt-2">
+                                            <img src="@item.Image" alt="" class="img-fluid">
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="top-categ-content pt-2">
+                                            <span class="cate">Category</span>
+                                            <h5 class="pb-2 m-0">
+                                                <a href="">@item.Name</a>
+                                            </h5>
+                                            <p class="m-0">
+                                                <span>$@item.Price</span>
+                                                <span><s>$119.00</s></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+}

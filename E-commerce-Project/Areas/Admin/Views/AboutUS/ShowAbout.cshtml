@@ -1,0 +1,85 @@
+﻿@model List<E_commerce_Project.Models.AboutUs>
+@{
+    ViewBag.Title = "ShowAbout";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Show About</h2>
+@if (Model.Any())
+{
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Vision</th>
+                        <th>Mission</th>
+                        <th>WhoAreWe</th>
+                        <th>CreatedBy</th>
+                        <th>CreationDate</th>
+                        <th>UpdatedBy</th>
+                        <th>UpdatedDate</th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@item.Vision</td>
+                            <td>@item.Mission</td>
+                            <td>@item.WhoAreWe</td>
+                            <td>@item.CreatedBy</td>
+                            <td>@item.CreationDate</td>
+                            <td>@item.UpdatedBy</td>
+                            <td>@item.UpdatedDate</td>
+                            <td>
+                                <button class="btn btn-warning" onclick="Detaile(@item.ID)">Detalis</button>
+                                <button class="btn btn-info" onclick="EditAbout(@item.ID)">Edit</button>
+                                <button class="btn btn-danger" onclick="DeleteAbout(@item.ID)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    </div>
+}
+else
+	{
+	            <div class="alert alert-warning">No Data</div>
+	}
+<script>
+    function Detaile(id) {
+        $.ajax({
+            url: '/Admin/AboutUS/Detaile',
+            type: 'Get',
+            data: { id: id }
+        }).done(function (data) {
+            $('#FormAbout').html(data);
+            $('#form0 input').attr('disabled', true)
+        })
+    }
+    function EditAbout(id) {
+        $.ajax({
+            url: '/Admin/AboutUS/EditAbout',
+            type: 'Get',
+            data: { id: id }
+        }).done(function (data) {
+            $('#FormAbout').html(data);
+        }).fail(function (data) {
+            $('.alert').html('error in Edit');
+        });
+    }
+    function DeleteAbout(id) {
+        $.ajax({
+            url: '/Admin/AboutUS/DeleteAbout',
+            type: 'Get',
+            data: {id:id},
+        }).done(function (data) {
+            LoadData();
+        }).fail(function (data) {
+            $('.alert').html('error in Delete');
+        });
+    }
+</script>

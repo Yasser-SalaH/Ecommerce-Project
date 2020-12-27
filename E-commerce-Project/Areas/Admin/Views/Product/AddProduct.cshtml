@@ -1,0 +1,64 @@
+﻿@model E_commerce_Project.ViewModel.ProductVM
+@{
+    string FormName = ViewBag.FormName;
+}
+@using (Ajax.BeginForm(FormName,
+    new AjaxOptions { OnSuccess = "onsuccess", OnFailure = "onfailure" }))
+{
+    if (FormName == "PostEditProduct")
+    {
+        @Html.HiddenFor(z => z.ID)
+        @Html.HiddenFor(z => z.CreatedBy)
+        @Html.HiddenFor(z => z.CreationDate)
+    }
+    <div class="form-group">
+        @Html.LabelFor(z => z.Name)
+        @Html.TextBoxFor(z => z.Name, new { placeholder = "Enter Name", @class = "form-control" })
+        @Html.ValidationMessageFor(z => z.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(z => z.Image)
+        @Html.TextBoxFor(z => z.Image, new { placeholder = "Enter Image", @class = "form-control" })
+        @Html.ValidationMessageFor(z => z.Image)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(z => z.Price)
+        @Html.TextBoxFor(z => z.Price, new { type = "number", placeholder = "Enter Price", @class = "form-control" })
+        @Html.ValidationMessageFor(z => z.Price)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(z => z.Decription)
+        @Html.TextAreaFor(z => z.Decription, new { placeholder = "Enter Decription", @class = "form-control" })
+        @Html.ValidationMessageFor(z => z.Decription)
+    </div>
+    if (FormName == "PostEditProduct" || FormName == "PostProduct")
+    {
+        <div class="form-group">
+            @Html.LabelFor(z => z.CatFK)
+            @Html.DropDownListFor(z => z.CatFK, new SelectList(new E_commerce_Project.DAL.CategoryDAL().GetAll(), "ID", "Name"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(z => z.CatFK)
+        </div>
+        <div id="SubCatDiv">
+            <label>Subcategory</label>
+            <select id="SubCatFK" name="SubCatFK" class="form-control">
+            </select>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(z => z.BrandFK)
+            @Html.DropDownListFor(z => z.BrandFK, new SelectList(new E_commerce_Project.DAL.BrandDAL().GetAll(), "ID", "Name"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(z => z.BrandFK)
+        </div>
+    }
+    if (FormName == "PostEditProduct")
+    {
+        <button type="submit" class="btn btn-info">Edit</button>
+    }
+    else if (FormName == "PostProduct")
+    {
+        <div>
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="reset" class="btn btn-danger">Clear</button>
+        </div>
+    }
+
+}

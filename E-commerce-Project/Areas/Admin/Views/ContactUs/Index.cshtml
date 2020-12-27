@@ -1,0 +1,44 @@
+﻿@model List<E_commerce_Project.Models.ContactUs>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Index</h2>
+<section>
+    <div class="alert" id="FormContactUS">
+        @Html.Action("AddContactUS")
+    </div>
+</section>
+<section>
+    <div id="USData">
+        @Html.Action("ContactUSData")
+    </div>
+</section>
+<script>
+    function onsuccess(data) {
+        if (data.done) {
+            LoadData();
+            Clear();
+        }
+        else {
+             alert("error");
+        }
+    }
+    function onfailure() {
+          toastr.error("Error");
+    }
+    function Clear() {
+         $("#form0")[0].reset();
+    }
+    function LoadData() {
+        $.ajax({
+            url: '/Admin/ContactUs/ContactUSData',
+            type: 'Get',
+        }).done(function (data) {
+            $('#USData').html(data);
+        }).fail(function (data) {
+            $('.alert').html('error in save');
+        });
+    }
+</script>

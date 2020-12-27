@@ -1,0 +1,50 @@
+﻿@model List<E_commerce_Project.Models.ProductColor>
+@{
+    ViewBag.Title = "ShowProductColor";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+<h2>Show Product Color</h2>
+@if (Model.Any())
+{
+    <div class="container">
+        <div class="rew">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Product</th>
+                        <th>Image</th>
+                        <th>CreatedBy</th>
+                        <th>CreationDate</th>
+                        <th>UpdatedBy</th>
+                        <th>UpdatedDate</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@item.ColorFk</td>
+                            <td>@item.ProductFK</td>
+                            <td>@item.Image</td>
+                            <td>@item.CreatedBy</td>
+                            <td>@item.CreationDate</td>
+                            <td>@item.UpdatedBy</td>
+                            <td>@item.UpdatedDate</td>
+                            <td>
+                                <button class="btn btn-warning" onclick="Detaile(@item.ID)">Detalis</button>
+                                <button class="btn btn-info" onclick="EditAbout(@item.ID)">Edit</button>
+                                <button class="btn btn-danger" onclick="DeleteAbout(@item.ID)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div  class="alert alert-warning">No Data</div>
+}
+

@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = (E_commerce_Project.Models.User)ViewBag.User;
+}
+@if (user != null)
+{
+    <div class="alert alert-warning">
+        <label>You are already login</label>
+    </div>
+}
+else
+{
+    <h2>Register</h2>
+    <div class="alert" id="alert"></div>
+    @Html.Action("Register")
+
+}
+<script>
+
+    function onSuccess(data) {
+        var massage;
+        if (data.done) {
+            massage = '<div class="alert alert-success">' + data.massage + '</div>';
+            $('#alert').html(massage)
+            $("#form0")[0].reset();
+        }
+        else {
+            massage = '<div class="alert alert-success">' + data.massage + '</div>';
+            $('.alert').html(massage)
+        }
+    }
+    function onFailure(data) {
+        var massage;
+        if (data.done) {
+            massage = '<div class="alert alert-success">' + data.massage + '</div>';
+            $('.alert').html(massage)
+        }
+    }
+    function confirmpassword() {
+        var password = $('#password').val();
+        var Confirmpassword = $('#Confirmpassword').val();
+        var massage = "Not matched";
+        if (password != Confirmpassword) {
+            $('#confirmpasswordMas').text(massage);
+        }
+        else {
+            $('#confirmpasswordMas').text('');
+        }
+    }
+    $('#Email').change(function () {
+        CheckEmail();
+    })
+    function CheckEmail() {
+        $.ajax({
+            url: '/Register/EmailExsist',
+            type: 'Get',
+            data: {
+                email: $('#Email').val()
+            }
+        }).done(function (data) {
+            if (data) {
+                $('#Emailnotmatced').text('This Email Is Use, Again Write Email.')
+            }
+            else {
+                $('#Emailnotmatced').text('')
+            }
+        }).fail(function (data) {
+
+        });
+    }
+
+</script>

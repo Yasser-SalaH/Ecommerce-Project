@@ -1,0 +1,76 @@
+﻿@model List<E_commerce_Project.Models.SubCategory>
+    <div class="container">
+        @if (Model.Any())
+        {
+            <div class="row">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Category.Name</td>
+                                <td>
+                                    <button class="btn btn-warning" onclick="DetailesSubCat(@item.ID)">Detalis</button>
+                                    <button class="btn btn-info" onclick="EditSubCat(@item.ID)">Edit</button>
+                                    <button class="btn btn-danger" onclick="DeleteSubCat(@item.ID)">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-danger">No Data</div>
+        }
+    </div>
+<script>
+    function DetailesSubCat(id) {
+        $.ajax({
+
+            url: '/Admin/SubCategory/DetailesSubCat',
+            type: 'Get',
+            data: {
+                id:id
+            }
+        }).done(function (data) {
+            $('#SubCatForm').html(data);
+            $('#form0 input').attr('disabled', true)
+        })
+    }
+    function EditSubCat(id) {
+        $.ajax({
+            url: '/Admin/SubCategory/EditSubCat',
+            type: 'Get',
+            data: {
+                id:id
+            }
+        }).done(function (data) {
+            $('#SubCatForm').html(data);
+        }).fail(function (data) {
+            $('.alert').html('error in Edit');
+        })
+    }
+    function DeleteSubCat(id) {
+        $.ajax({
+            url: '/Admin/SubCategory/DeleteSubCat',
+            type: 'Get',
+            data: {
+                id:id
+            }
+        }).done(function (data) {
+            LoadData();
+        }).fail(function (data) {
+            $('.alert').html('error in Deleted');
+        })
+    }
+</script>

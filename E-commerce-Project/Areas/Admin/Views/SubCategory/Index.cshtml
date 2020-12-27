@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Index</h2>
+`<div class="alert" id="SubCatForm">
+    @Html.Action("AddSubCat")
+    </div>
+<div id="SubCatData">
+    @Html.Action("SubCategoryData")
+</div>
+<script>
+    function onsuccess(data) {
+        if (data.done) {
+            LoadData();
+            Clear();
+        }
+        else {
+            $('.alert').html(data.message);
+        }
+    }
+    function onfailure(data) {
+        toastr.error("Error");
+    }
+    function Clear() {
+        $('#form0')[0].reset();
+    }
+    function LoadData() {
+        $.ajax({
+            url: '/Admin/SubCategory/SubCategoryData',
+            type: 'Get',
+        }).done(function (data) {
+            $('#SubCatData').html(data);
+        }).fail(function () {
+            $('.alert').html('error in save');
+        })
+    }
+</script>

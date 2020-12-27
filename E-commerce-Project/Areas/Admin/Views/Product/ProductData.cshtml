@@ -1,0 +1,105 @@
+﻿@model List<E_commerce_Project.Models.Product>
+    <div>
+        @if (Model.Any())
+        {
+            <div class="container">
+                <div class="row">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Image</th>
+                                <th>SubCategory</th>
+                                <th>Price</th>
+                                <th>Brand</th>
+                                <th>Category</th>
+                                <th>Decription</th>
+                                <th>CreatedBy</th>
+                                <th>CreationDate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td><img src=" @item.Image" alt="@item.Name" width="100px" /></td>
+                                    <td>@item.SubCatFK</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.BrandFK</td>
+                                    <td>@item.CatFK</td>
+                                    <td>@item.Decription</td>
+                                    <td>@item.CreatedBy</td>
+                                    <td>@item.CreationDate</td>
+                                    <td>
+                                        <button class="btn btn-warning" onclick="DetailesProduct(@item.ID)">Detalis</button>
+                                        <button class="btn btn-info" onclick="EditProduct(@item.ID)">Edit</button>
+                                        <button class="btn btn-danger" onclick="DeleteProduct(@item.ID)">Delete</button>
+                                        <button class="btn btn-xs" onclick="Uploadimage(@item.ID)">Upload Image</button>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+         else
+         {
+            <div class="alert alert-danger">No Data</div>
+         }
+    </div>
+      <script>
+          function DetailesProduct(id) {
+              $.ajax({
+                  url: '/Admin/Product/DetailesProduct',
+                  type: 'Get',
+                  data: {
+                      id: id
+                  }
+              }).done(function (data) {
+                  $('#ProductForm').html(data);
+                  $('#form0 input').attr('disabled', true)
+              }).fail(function (data) {
+
+              })
+          }
+          function EditProduct(id) {
+              $.ajax({
+                  url: '/Admin/Product/EditProduct',
+                  type: 'Get',
+                  data: {
+                      id: id
+                  }
+              }).done(function (data) {
+                  $('#ProductForm').html(data);
+              }).fail(function (data) {
+                  $('.alert').html('error in Save');
+              });
+          }
+          function DeleteProduct(id) {
+              $.ajax({
+                  url: '/Admin/Product/DeleteProduct',
+                  type: 'Get',
+                  data: {
+                      id:id
+                  }
+              }).done(function (data) {
+                  LoadData();
+              }).fail(function (data) {
+            $('.alert').html('error in Delete');
+              })
+          }
+          function Add() {
+              $.ajax({
+                  url: "/Admin/Product/AddProduct",
+                  type: "Get",
+
+              }).done(function (data) {
+                  $('#ProductForm').html(data);
+              }).fail(function () {
+                  $('.alert').html("Error in load form");
+              });
+          }
+      </script>

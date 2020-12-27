@@ -1,0 +1,42 @@
+﻿@model E_commerce_Project.ViewModel.ContactMessageVM
+@{
+    string FormName = ViewBag.FormName;
+}
+@using (Ajax.BeginForm(FormName,
+    new AjaxOptions { OnSuccess = "onsuccess", OnFailure = "onfailure" }))
+{
+   <div>
+                 @Html.HiddenFor(z => z.ID)
+                 @Html.HiddenFor(z => z.CreatedBy)
+                 @Html.HiddenFor(z => z.CreationDate)
+                 <div class="form-group">
+                     @Html.LabelFor(z => z.Name)
+                     @Html.TextBoxFor(z => z.Name, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(z => z.Name)
+                 </div>
+                 <div class="form-group">
+                     @Html.LabelFor(z => z.Email)
+                     @Html.TextBoxFor(z => z.Email, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(z => z.Email)
+                 </div>
+                 <div class="form-group">
+                     @Html.LabelFor(z => z.Message)
+                     @Html.TextBoxFor(z => z.Message, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(z => z.Message)
+                 </div>
+                 @if (FormName == "EditCategory")
+                 {
+                     <button type="submit" class="btn btn-info"> Edit</button>
+                 }
+                 else if (FormName == "AddContactMsg")
+                 {
+                     <button type="submit" class="btn btn-success">Save</button>
+                     <button type="reset" class="btn btn-group-sm">Clear</button>
+                 }
+                 else
+                 {
+                     <button type="submit" class="btn btn-success">Save</button>
+                     <button type="reset" class="btn btn-group-sm">Clear</button>
+                 }
+   </div>
+}        

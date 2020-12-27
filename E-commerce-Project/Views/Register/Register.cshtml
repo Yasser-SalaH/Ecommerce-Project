@@ -1,0 +1,52 @@
+﻿@model E_commerce_Project.ViewModel.UserVM
+@{
+    string Action = ViewBag.Action;
+}
+@using (Ajax.BeginForm(Action, new AjaxOptions
+{ OnSuccess = "onSuccess", OnFailure = "onFailure" }))
+{
+        if (Action == "PostEdit")
+        {
+            @Html.HiddenFor(z => z.ID)
+            @Html.HiddenFor(z => z.CreationDate)
+            @Html.HiddenFor(z => z.IsActive)
+        }
+    <div>
+        @Html.LabelFor(z => z.Name)
+        @Html.TextBoxFor(z => z.Name, new { placeholder = "Input Name", @class = "form-control" })
+        @Html.ValidationMessageFor(z => z.Name)
+    </div>
+    <div>
+        @Html.LabelFor(z => z.Email)
+        @Html.TextBoxFor(z => z.Email, new { placeholder = "Input Email", id = "Email", type = "Email", @class = "form-control" })
+        <label id="Emailnotmatced"></label>
+        @Html.ValidationMessageFor(z => z.Email)
+    </div>
+    <div>
+        @Html.LabelFor(z => z.Phone)
+        @Html.TextBoxFor(z => z.Phone, new { placeholder = "Enter Phone", @class = "form-control" })
+        @Html.ValidationMessageFor(z => z.Phone)
+    </div>
+    <div>
+        @Html.LabelFor(z => z.Address)
+        @Html.TextBoxFor(z => z.Address, new { placeholder = "Enter Adress", @class = "form-control" })
+        @Html.ValidationMessageFor(z => z.Address)
+    </div>
+    <div>
+        @Html.LabelFor(z => z.Password)
+        @Html.TextBoxFor(z => z.Password, new { Type = "password", placeholder = "Input Password", @class = "form-control" })
+        @Html.ValidationMessageFor(z => z.Password)
+    </div>
+    <div>
+        @Html.LabelFor(z => z.ConfirmPassword)
+        @Html.TextBoxFor(z => z.ConfirmPassword, new { Type = "password", placeholder = "Agin Input Password", @class = "form-control" })
+        <label id="confirmpasswordMas"></label>
+        @Html.ValidationMessageFor(z => z.ConfirmPassword)
+    </div>
+        string ButtonName = (Action == "PostUser") ? "Register" : "Edit";
+         <div>
+        
+                <button type="submit" class="btn btn-success">@ButtonName</button>
+    </div>
+        }
+
