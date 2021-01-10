@@ -1,0 +1,78 @@
+﻿@model E_commerce_Project.ViewModel.ContactMessageVM
+
+<!--contact form-->
+<section class="form text-capitalize">
+    <div class="container">
+        <div class="heading">
+            <p>
+                leave a messsage
+            </p>
+            <h2>
+                We love to hear from you
+            </h2>
+        </div>
+        <div class="main-form">
+            <div class="container">
+                <div class="row">
+                    @using (Ajax.BeginForm("AddContactMessage", new AjaxOptions
+                    { OnSuccess = "OnSuccess", OnFailure = "OnFailure" }))
+                    {
+                        <!--name form with validation-->
+                        <div class="form-group col-sm-12 col-lg-6">
+                            <label>your name:</label>
+                            <div style="width: 1000px">
+                                @Html.TextBoxFor(z => z.Name, new
+                            {
+                                @class = "form-control",
+                                type = "text",
+                                placeholder = "your name",
+                                required = "required"
+                            })
+                            </div>
+                            <!--validation to name input-->
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+
+                        <!--email form with validation-->
+                        <div class="form-group col-sm-12 col-lg-6">
+                            <label>your email:</label>
+                            <div style="width:1000px">
+                                @Html.TextBoxFor(z => z.Email, new
+                                {
+                                    @class = "form-control",
+                                    type = "email",
+                                    placeholder = "your email",
+                                    required = "required"
+                                })
+                            </div>
+                            <!--validation to email input-->
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label>messsage:</label>
+                            @Html.TextAreaFor(z => z.Message, new
+                                    {
+                                        @class = "text-area",
+                                        placeholder = "your email",
+                                        required = "required"
+                                    })
+                            <!--validation to message input-->
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+
+                    }
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>

@@ -1,6 +1,15 @@
 ﻿<!DOCTYPE html>
 @{
     var CurrentUser = (E_commerce_Project.Models.User)Session["user"];
+    int n;
+    if (Session["UserOrder"] == null)
+    {
+        n = 0;
+    }
+    else
+    {
+        n = ((List<E_commerce_Project.Models.OrderDetails>)Session["UserOrder"]).Count;
+    }
 }
 <html>
 <head>
@@ -55,7 +64,7 @@
                                 <div class="col-4">
                                     <div class="cart" id="cart">
                                         <i class="fas fa-shopping-cart ico"></i>
-                                        <span class="badge badge-danger">1</span>
+                                        <span class="badge badge-danger">@n</span>
                                     </div>
                                 </div>
 
@@ -85,34 +94,36 @@
                 <!-- Cart items -->
                 <div class="cart-items text-center col-4 p-2" id="cart-items">
 
-                    <div class="categ my-3">
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="top-categ-img px-1">
-                                    <img src="~/Customs/img/top-category/3.png" alt="" class="img-fluid">
-                                </div>
-                            </div>
-                            <div class="col-7">
-                                <div class="top-categ-content pt-1">
-                                    <h5 class="pb-2 m-0">
-                                        <a href="">Fusion Backpack</a>
-                                    </h5>
-                                    <p class="m-0">
-                                        <span>$100.00</span>
-                                    </p>
-                                    <div class="delete">
-                                        <a href=""><i class="far fa-trash-alt del"></i></a>
+                    @if (Session["UserOrder"] != null)
+                    {
+                        foreach (var item in (List<E_commerce_Project.Models.OrderDetails>)Session["UserOrder"])
+                        {
+                            <div class="categ my-3">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="top-categ-img px-1">
+                                            <img src="@item.Product.Image" alt="" class="img-fluid" style="width:50px;
+                                                     height:50px">
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="top-categ-content pt-1">
+                                            <h5 class="pb-2 m-0">
+                                                <a href="">@item.Product.Name</a>
+                                            </h5>
+                                            <p class="m-0">
+                                                <span>$@item.Product.Price</span>
+                                            </p>
+                                            <div class="delete">
+                                                <a href=""><i class="far fa-trash-alt del"></i></a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-
-
-
-
-
+                        }
+                    }
                     <hr>
                     <div class="show-more px-3 py-2">
                         <a href="./cart.html">Show More</a>
@@ -176,10 +187,10 @@
                     <!-- tabs -->
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#login">Login</a>
+                            <a class="nav-link active" data-toggle="tab" href="/Register/Login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#register">register</a>
+                            <a class="nav-link" data-toggle="tab" href="/Register/Register">register</a>
                         </li>
 
                     </ul>
@@ -188,72 +199,14 @@
                     <div class="tab-content">
                         <div class="tab-pane container active" id="login">
                             <!-- Login Tab -->
-                            <div class="login">
-                                <div class="form-group">
-                                    <label class="p-0">Email address</label>
-                                    <input type="email" class="form-control" id="lo-email" autocomplete="off">
-                                    <i class="fas fa-at ico"></i>
-                                    <p class="m-0 text-danger d-none lo-email"> Pleas Enter Your Email.</p>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="p-0">Password</label>
-                                    <input type="password" class="form-control" id="lo-pass">
-                                    <i class="fas fa-unlock-alt ico"></i>
-                                    <p class="m-0 text-danger d-none lo-pass"> Pleas Enter Your password.</p>
-                                </div>
-
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="remember" style="
-                      padding: 10px 25px">
-                                    <label class="custom-control-label" for="remember">Remember Me</label>
-                                </div>
-
-                                <button type="submit" class="btn btn-primary mt-4 rounded-0">Login</button>
-                            </div>
-
+                            @Html.Action("Login", "Register")
                         </div>
                         <!-- register -->
                         <div class="tab-pane container fade" id="register">
-                            <!-- Login Tab -->
-                            <div class="register">
-                                <div class="form-group">
-                                    <label for="">Name</label>
-                                    <input type="text" id="name" class="form-control" autocomplete="off">
-                                    <i class="far fa-user ico"></i>
-                                    <p class="m-0 text-danger d-none name"> Pleas Enter Your Name.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Email</label>
-                                    <input type="email" id="email" class="form-control" autocomplete="off">
-                                    <i class="fas fa-at ico"></i>
-                                    <p class="m-0 text-danger d-none email"> Pleas Enter Your Email.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Password</label>
-                                    <input type="password" id="pass" class="form-control">
-                                    <i class="fas fa-unlock ico"></i>
-                                    <p class="m-0 text-danger d-none pass"> Pleas Enter Your Password.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Re-Password</label>
-                                    <input type="password" id="re-pass" class="form-control">
-                                    <i id="ico" class="fas fa-undo ico"></i>
-                                    <p class="m-0 text-danger d-none re-pass"> This Not Equal Password.</p>
-                                </div>
-                                <div class="m-or-f">
-                                    <div class="custom-control custom-radio custom-control-inline male">
-                                        <input type="radio" class="custom-control-input" id="maleRadio" name="radio">
-                                        <label class="custom-control-label" for="maleRadio">Male</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline female">
-                                        <input type="radio" class="custom-control-input" id="femaleRadio" name="radio" value="Male">
-                                        <label class="custom-control-label" for="femaleRadio">Female</label>
-                                    </div>
-                                    <button type="button" class="btn btn-danger mt-4 d-block rounded-0">Sign Up</button>
 
-                                </div>
-                            </div>
+                           @*@Html.Action("Register","Register")/**@
+
+                            <!-- Login Tab -->
                         </div>
                     </div>
                 </div>  <!-- End Login And Register Tab-->
@@ -314,16 +267,16 @@
 
                                 <ul class="navbar-nav ">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="index.html" class="active">Home</a>
+                                        <a class="nav-link active" href="/Home/Index" class="active">Home</a>
                                     </li>
                                     <li class="nav-item shop" id="shop">
-                                        <a class="nav-link" href="shop.html">shop</a>
+                                        <a class="nav-link" href="/Shop/Index">shop</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="about.html">About us</a>
+                                        <a class="nav-link" href="/About/Index">About us</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="contact.html">contact</a>
+                                        <a class="nav-link" href="/Contact/Index">contact</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="faq.html">Faq</a>

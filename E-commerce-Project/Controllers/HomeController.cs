@@ -15,11 +15,13 @@ namespace E_commerce_Project.Controllers
         {
             return View();
         }
+        // retrieve the products that will be added at the banner in the home page
         public ActionResult Banner()
         {
             var list = ProductDAL.GetAll().OrderByDescending(z => z.ID).Take(3).ToList();
             return PartialView(list);
         }
+        // retrieve the products that will be viewed in the "New Products" area in home page.
         public ActionResult NewProduct()
         {
             var list = ProductDAL.GetAll().OrderByDescending(z => z.ID).Take(10).ToList();
@@ -40,6 +42,11 @@ namespace E_commerce_Project.Controllers
         {
             var list = ProductDAL.GetAll();
             return PartialView(list);
+        }
+        public PartialViewResult Testmonial()
+        {
+            return PartialView(new ContactMessegaDAL().GetAll()
+                .Where(z => z.Answer == true).ToList());
         }
     }
 }

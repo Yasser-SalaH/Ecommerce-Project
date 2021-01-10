@@ -9,52 +9,81 @@ namespace E_commerce_Project.DAL
     public class ContactMessegaDAL
     {
         EcommerceProjectEntities db = new EcommerceProjectEntities();
-        public bool Edit(ContactMesaage contactMesaage)
+        public bool Add(ContactMesaage contactMesaage, out string message)
         {
             try
             {
-                var obj = db.ContactMesaage.Where(z => z.ID == contactMesaage.ID).FirstOrDefault();
+                if (contactMesaage != null)
+                {
+                    db.ContactMesaage.Add(contactMesaage);
+                    db.SaveChanges();
+                    message = "Added Successfully";
+                    return true;
+                }
+
+                message = "Object is null";
+                return false;
+            }
+            catch (Exception e)
+            {
+                message = e.Message;
+                return false;
+            }
+        }
+        //Edit
+        public bool Edit(ContactMesaage contactmsg, out string message)
+        {
+            try
+            {
+                ContactMesaage obj = db.ContactMesaage.Where(z => z.ID == contactmsg.ID).FirstOrDefault();
                 if (obj != null)
                 {
 
-                    obj.Answer = contactMesaage.Answer;
+                    obj.Answer = contactmsg.Answer;
                     db.SaveChanges();
+                    message = "Edited Successfully";
                     return true;
                 }
+                message = "Object is null";
                 return false;
             }
             catch (Exception e)
             {
-
+                message = e.Message;
                 return false;
             }
         }
-        public bool Delete(long id)
+        //Delete 
+        public bool Delete(long id, out string message)
         {
+            ContactMesaage obj = db.ContactMesaage.Where(z => z.ID == id).FirstOrDefault();
             try
             {
-                var obj = db.ContactMesaage.Where(z => z.ID == id).FirstOrDefault();
-                if (obj!=null)
+                if (obj != null)
                 {
                     db.ContactMesaage.Remove(obj);
                     db.SaveChanges();
+                    message = "Deleted Successfully";
                     return true;
                 }
+                message = "Object is null";
                 return false;
             }
             catch (Exception e)
             {
-
-                return false ;
+                message = e.Message;
+                return false;
             }
         }
-        public ContactMesaage Getone(long id)
+        //Details for one item
+        public ContactMesaage GetOne(long id)
         {
             return db.ContactMesaage.Where(z => z.ID == id).FirstOrDefault();
         }
-        public List<ContactMesaage> GetALL()
+        //Get All Data
+        public List<ContactMesaage> GetAll()
         {
-            return db.ContactMesaage.ToList();
+            return db.ContactMesaage.OrderBy(z => z.Answer).ToList();
         }
     }
 }

@@ -12,9 +12,9 @@
                 @Html.TextBoxFor(z => z.Name, new { placeholder = "Enter Color Name", @class = "form-control" })
                 @Html.ValidationMessageFor(z => z.Name)
             </div>
-            <div class="form-group">
-                @Html.LabelFor(z => z.Code)
-                @Html.TextBoxFor(z => z.Code, new { placeholder = "Enter Code Color", @class = "form-control" })
+            <div>
+                @Html.LabelFor(z => z.Code, new { @class = "control-label" })
+                <input type="color" name="Code" />
                 @Html.ValidationMessageFor(z => z.Code)
             </div>
         </div>

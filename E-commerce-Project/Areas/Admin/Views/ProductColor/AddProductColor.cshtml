@@ -1,24 +1,39 @@
 ﻿@model E_commerce_Project.ViewModel.ProductColorVM
+    @{ 
+        string FormName = ViewBag.FormName;
+    }
 <div class="col-md-12">
-    @using (Ajax.BeginForm("PostProductColor",
+    @using (Ajax.BeginForm(FormName,
         new AjaxOptions { OnSuccess = "onsuccess", OnFailure = "onfailure" }))
     {
         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-            <label class="control-label">Image</label>
-            @Html.TextBoxFor(z => z.Image, new { @class = "form-control" })
-            @Html.ValidationMessageFor(z => z.Image)
-        </div>
-        <div class="form-group col-md-4 col-sm-4 col-xs-12">
-            <label class="control-label">ProductName</label>
-            @Html.DropDownListFor(z => z.ProductFK, new SelectList(new E_commerce_Project.DAL.ProductColorDAL().GetAll(),"ID","Name"),new { @class = "form-control" })
+            <label class="control-label">Product Name</label>
+            @Html.DropDownListFor(z => z.ProductFK, new SelectList(new E_commerce_Project.DAL.ProductColorDAL().GetAll()
+           , "ID", "Name"), new { @class = "form-control" })
             @Html.ValidationMessageFor(z => z.ColorFk)
         </div>
         <div class="form-group col-md-4 col-sm-4 col-xs-12">
-            <label class="control-label">Color Name</label>
-            @Html.DropDownListFor(z => z.ColorFk, new SelectList(new E_commerce_Project.DAL.ProductColorDAL().GetAll(),"ID","Name"),new { @class = "form-control" } )
+            <label class="control-label">Color </label>
+            @Html.DropDownListFor(z => z.ColorFk, new SelectList(new E_commerce_Project.DAL.ProductColorDAL().GetAll()
+           , "ID", "Name"), new { @class = "form-control" })
             @Html.ValidationMessageFor(z => z.ColorFk)
         </div>
-        <button type="submit" class="btn btn-success">save</button>
+        if (FormName == "EditProductColor")
+        {
+            @Html.HiddenFor(z => z.ID)
+            @Html.HiddenFor(z => z.CreationDate)
+            @Html.HiddenFor(z => z.Image)
+            @Html.HiddenFor(z => z.CreatedBy)
+            <button type="submit" class="btn btn-success">Edit</button>
+        }
+        else
+        {
+
+            <div>
+                <button type="submit" class="btn btn-success">Add</button>
+                <button type="reset" class="btn btn-danger">Clear</button>
+            </div>
+        }
     }
 
 </div>

@@ -176,6 +176,7 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
           <Key>
             <PropertyRef Name="ID" />
             <PropertyRef Name="Image" />
+            <PropertyRef Name="IsConfirm" />
             <PropertyRef Name="CreatedBy" />
             <PropertyRef Name="CreationDate" />
             <PropertyRef Name="UserFK" />
@@ -183,11 +184,11 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Image" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="FeedBack" Type="nvarchar" MaxLength="2000" />
-          <Property Name="IsConfirm" Type="bit" />
+          <Property Name="IsConfirm" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="bigint" Nullable="false" />
           <Property Name="CreationDate" Type="datetime" Nullable="false" />
           <Property Name="UpdateBy" Type="bigint" />
-          <Property Name="UpdateDate" Type="nchar" MaxLength="10" />
+          <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UserFK" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
@@ -604,6 +605,18 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TestMonials_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TestMonials" Type="Self.TestMonials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TestMonials">
+              <PropertyRef Name="UserFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="User1" Type="Self.User" Multiplicity="*" />
@@ -821,6 +834,10 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
             <End Role="User" EntitySet="User" />
             <End Role="SubCategory" EntitySet="SubCategory" />
           </AssociationSet>
+          <AssociationSet Name="FK_TestMonials_User" Association="Self.FK_TestMonials_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TestMonials" EntitySet="TestMonials" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_User" Association="Self.FK_User_User">
             <End Role="User" EntitySet="User" />
             <End Role="User1" EntitySet="User" />
@@ -990,6 +1007,10 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
           <AssociationSet Name="FK_SubCategory_User1" Association="EcommerceProjectModel.FK_SubCategory_User1">
             <End Role="User" EntitySet="User" />
             <End Role="SubCategory" EntitySet="SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestMonials_User" Association="EcommerceProjectModel.FK_TestMonials_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TestMonials" EntitySet="TestMonials" />
           </AssociationSet>
           <AssociationSet Name="FK_User_User" Association="EcommerceProjectModel.FK_User_User">
             <End Role="User" EntitySet="User" />
@@ -1256,6 +1277,7 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
           <NavigationProperty Name="ProductColor1" Relationship="EcommerceProjectModel.FK_ProductColor_User1" FromRole="User" ToRole="ProductColor" />
           <NavigationProperty Name="SubCategory" Relationship="EcommerceProjectModel.FK_SubCategory_User" FromRole="User" ToRole="SubCategory" />
           <NavigationProperty Name="SubCategory1" Relationship="EcommerceProjectModel.FK_SubCategory_User1" FromRole="User" ToRole="SubCategory" />
+          <NavigationProperty Name="TestMonials" Relationship="EcommerceProjectModel.FK_TestMonials_User" FromRole="User" ToRole="TestMonials" />
           <NavigationProperty Name="User1" Relationship="EcommerceProjectModel.FK_User_User" FromRole="User" ToRole="User1" />
           <NavigationProperty Name="User2" Relationship="EcommerceProjectModel.FK_User_User" FromRole="User1" ToRole="User" />
           <NavigationProperty Name="User11" Relationship="EcommerceProjectModel.FK_User_User1" FromRole="User" ToRole="User1" />
@@ -1285,6 +1307,7 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
           <Key>
             <PropertyRef Name="ID" />
             <PropertyRef Name="Image" />
+            <PropertyRef Name="IsConfirm" />
             <PropertyRef Name="CreatedBy" />
             <PropertyRef Name="CreationDate" />
             <PropertyRef Name="UserFK" />
@@ -1292,12 +1315,13 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Image" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="FeedBack" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="IsConfirm" Type="Boolean" />
+          <Property Name="IsConfirm" Type="Boolean" Nullable="false" />
           <Property Name="CreatedBy" Type="Int64" Nullable="false" />
           <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdateBy" Type="Int64" />
-          <Property Name="UpdateDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UserFK" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="EcommerceProjectModel.FK_TestMonials_User" FromRole="TestMonials" ToRole="User" />
         </EntityType>
         <Association Name="FK_AboutUs_User">
           <End Type="EcommerceProjectModel.User" Role="User" Multiplicity="1" />
@@ -1680,6 +1704,18 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
             </Principal>
             <Dependent Role="SubCategory">
               <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestMonials_User">
+          <End Type="EcommerceProjectModel.User" Role="User" Multiplicity="1" />
+          <End Type="EcommerceProjectModel.TestMonials" Role="TestMonials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TestMonials">
+              <PropertyRef Name="UserFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

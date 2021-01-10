@@ -14,6 +14,11 @@
             @Html.TextBoxFor(z => z.Password, new {Type="Password", palceholder = "Enter Password", @class = "form-control" })
             @Html.ValidationMessageFor(z => z.Password)
         </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="remember" style="
+                      padding: 10px 25px">
+            <label class="custom-control-label" for="remember">Remember Me</label>
+        </div>
         <div>
             <button type="submit" class="btn btn-success">Login</button>
         </div>

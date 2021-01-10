@@ -79,13 +79,45 @@ namespace E_commerce_Project.DAL
                 return false;
             }
         }
-        public Product Getone(long id)
+        public Product Getone(long? id)
         {
-           return db.Product.Where(z => z.ID == id).FirstOrDefault();
+            if (id == null)
+            {
+                return null;
+            }
+
+            return db.Product.Where(z => z.ID == id).FirstOrDefault();
+        }
+       // public List<Product> GetAll()
+       // {
+           // return db.Product.ToList();
+       // }
+        public List<Product> FilterByBrand(long brandID)
+        {
+            return GetAll().Where(z => z.BrandFK == brandID).ToList();
+        }
+        public List<Product> FilterByCategory(long categoryID)
+        {
+            return GetAll().Where(z => z.CatFK == categoryID).ToList();
         }
         public List<Product> GetAll()
         {
-            return db.Product.ToList();
+            return db.Product.OrderByDescending(z => z.ID).ToList();
+        }
+        public List<Product> FilterByPrice(long price)
+        {
+            return GetAll().Where(z => z.Price == price).ToList();
+        }
+        public List<Product> FilterByColor(long id)
+        {
+            var items = new ProductColorDAL().GetAll().
+                Where(z => z.ColorFk == id).Select(z => z.ProductFK).ToList();
+            List<Product> products = new List<Product>();
+            foreach (var item in items)
+            {
+                products.Add(new ProductDAL().Getone(item));
+            }
+            return products;
         }
     }
 }

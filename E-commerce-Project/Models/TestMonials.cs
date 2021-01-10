@@ -17,11 +17,13 @@ namespace E_commerce_Project.Models
         public long ID { get; set; }
         public string Image { get; set; }
         public string FeedBack { get; set; }
-        public Nullable<bool> IsConfirm { get; set; }
+        public bool IsConfirm { get; set; }
         public long CreatedBy { get; set; }
         public System.DateTime CreationDate { get; set; }
         public Nullable<long> UpdateBy { get; set; }
-        public string UpdateDate { get; set; }
+        public Nullable<System.DateTime> UpdateDate { get; set; }
         public long UserFK { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }

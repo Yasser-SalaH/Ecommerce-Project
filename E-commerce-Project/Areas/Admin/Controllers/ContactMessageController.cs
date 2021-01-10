@@ -11,84 +11,81 @@ namespace E_commerce_Project.Areas.Admin.Controllers
 {
     public class ContactMessageController : Controller
     {
-        ContactMessegaDAL dAL = new ContactMessegaDAL();
+        AutherizationDAL authorization = new AutherizationDAL();
+        ContactMessegaDAL contactMessageDAL = new ContactMessegaDAL();
+
         // GET: Admin/ContactMessage
         public ActionResult Index()
         {
-            return View(dAL.GetALL());
+            if (!authorization.Admin((User)Session["User"]))
+            {
+                return PartialView("ErrorView");
+            }
+            return View();
         }
-        public PartialViewResult ContactMsg()
+        public PartialViewResult Form()
         {
-            return PartialView(dAL.GetALL());
-        }
-        public PartialViewResult AddContactMsg()
-        {
-            ViewBag.FormName = "AddContactMsg";
+            if (!authorization.Admin((User)Session["User"]))
+            {
+                return PartialView("ErrorView");
+            }
             return PartialView();
         }
-        public PartialViewResult DetailsContactMessage(long id)
+        public PartialViewResult ContactMessageTable()
         {
-            var data = dAL.Getone(id);
-            ContactMessageVM obj = new ContactMessageVM()
+            //if (!authorization.Admin((User)Session["User"]))
+            //{
+            //    return PartialView("ErrorView");
+            //}
+            return PartialView(contactMessageDAL.GetAll());
+        }
+        public PartialViewResult Details(long id)
+        {
+            if (!authorization.Admin((User)Session["User"]))
             {
-                ID = data.ID,
-                Email = data.Email,
-                Name = data.Name,
-                Message = data.Message,
-                CreatedBy = (Int32)data.CreatedBy,
-                CreationDate = data.CreationDate,
-                UpdatedBy = (Int32)data.UpdatedBy,
-                UpdatedDate = (DateTime)data.UpdatedDate,
-                Answer = data.Answer
+                return PartialView("ErrorView");
+            }
+            var contactMessage = contactMessageDAL.GetOne(id);
+            var obj = new ContactMessageVM()
+            {
+                ID = contactMessage.ID,
+                Email = contactMessage.Email,
+                Answer = contactMessage.Answer,
+                CreatedBy = contactMessage.CreatedBy,
+                CreationDate = contactMessage.CreationDate,
+                Message = contactMessage.Message,
+                Name = contactMessage.Name
             };
-            ViewBag.FormName = "DetailsContactMessage";
+            return PartialView("Form", obj);
+        }
 
-            return PartialView("AddContactMsg", obj);
-        }
-        public PartialViewResult IsAnswered(long id)
-        {
-            var data = dAL.Getone(id);
-            ContactMessageVM obj = new ContactMessageVM()
-            {
-                ID = data.ID,
-                Email = data.Email,
-                Name = data.Name,
-                Message = data.Message,
-                CreatedBy = (Int32)data.CreatedBy,
-                CreationDate = data.CreationDate,
-                UpdatedBy = (Int32)data.UpdatedBy,
-                UpdatedDate = (DateTime)data.UpdatedDate,
-                Answer = data.Answer
-            };
-            ViewBag.FormName = "IsAnswered";
-            return PartialView("AddContactMsg", obj);
-        }
         [HttpPost]
-        public JsonResult IsAnswered(ContactMessageVM contactvm)
+        public JsonResult Answered(long id)
         {
-            ContactMesaage contact = new ContactMesaage()
-            {
-                ID = contactvm.ID,
-                Answer = contactvm.Answer
-            };
-            if (dAL.Edit(contact))
-            {
-                TempData["Edited"] = "Edited Successfully";
+            var obj = contactMessageDAL.GetOne(id);
+            obj.Answer = true;
+            string message;
+            return Json(
+                new
+                {
+                    done = contactMessageDAL.Edit(obj, out message),
+                    message
+                }
+                , JsonRequestBehavior.AllowGet);
+        }
 
-                return Json(new { done = true }, JsonRequestBehavior.AllowGet);
-            }
-            return Json(new { done = false }, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult DeleteContactMessage(long id)
+
+        [HttpPost]
+        public JsonResult Delete(long id)
         {
-            if (dAL.Delete(id))
-            {
-                //viewbag Deleted successfully
-                TempData["Deleted"] = "Deleted Successsfully";
-                return Json(new { done = true }, JsonRequestBehavior.AllowGet);
-                //TempData["added"] = true;
-            }
-            return Json(new { done = false }, JsonRequestBehavior.AllowGet);
+            string message;
+            return Json(
+                new
+                {
+                    done = contactMessageDAL.Delete(id, out message),
+                    message
+                },
+                JsonRequestBehavior.AllowGet);
         }
-    }   
+    }
 }

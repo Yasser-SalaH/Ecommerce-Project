@@ -1,53 +1,31 @@
 ﻿
+
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
-<div class="alert" id="AddContactMsg">
-    @Html.Action("AddContactMsg")
+<h2>Contact Messages</h2>
+
+<div id="alert">
+
 </div>
-<div id="ContactMsgData">
-    @Html.Action("ContactMsg");
+<div id="c-m-form">
+    @Html.Action("Form")
 </div>
+
+<div id="c-m-details">
+    @Html.Action("ContactMessageTable")
+</div>
+
 <script>
-    //OnSuccess
-    function OnSuccess(data)
-    {
-        if (data.done)
-        {
-            LoadData();
-            Clear();
-        }
-        else
-        {
-            alert("error");
-        }
-
-    }
-    //OnFailure
-    function OnFailure()
-    {
-        toastr.error("ERROR");
-    }
-    //Clear
-    function Clear() {
-        $('#form0')[0].reset();
-    }
-    //Load Data
-    function LoadData()
-    {
+    function LoadData() {
         $.ajax({
-            url: '/Admin/ContactMessage/ContactMsg',
-            type: 'Get'
+            url: "/Admin/ContactMessage/ContactMessageTable",
+            type: "Get"
         }).done(function (data) {
-            $('#ContactMsg').html(data);
+            $('#c-m-details').html(data);
         }).fail(function (data) {
-            $('.alert').html("error in save");
-
         });
-
     }
 </script>
-

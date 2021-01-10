@@ -5,22 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4417365de00e4078910351cd9d7dea88" Name="Diagram1">
-        <EntityTypeShape EntityType="EcommerceProjectModel.AboutUs" Width="1.5" PointX="3" PointY="11.5" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.Brand" Width="1.5" PointX="3" PointY="27.5" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.Category" Width="1.5" PointX="3" PointY="23.75" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.Color" Width="1.5" PointX="3" PointY="31.125" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.ContactMesaage" Width="1.5" PointX="3" PointY="34.875" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.ContactUs" Width="1.5" PointX="3" PointY="19.875" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.Order" Width="1.5" PointX="5.25" PointY="14.25" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.OrderDetails" Width="1.5" PointX="9.75" PointY="18" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.Product" Width="1.5" PointX="7.5" PointY="20.75" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.ProductColor" Width="1.5" PointX="9.75" PointY="23.25" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.AboutUs" Width="1.5" PointX="3" PointY="34.875" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.Brand" Width="1.5" PointX="3" PointY="15.25" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.Category" Width="1.5" PointX="3" PointY="22.625" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.Color" Width="1.5" PointX="3" PointY="7.625" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.ContactMesaage" Width="1.5" PointX="3" PointY="30.875" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.ContactUs" Width="1.5" PointX="3" PointY="11.375" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.Order" Width="1.5" PointX="5.25" PointY="27.875" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.OrderDetails" Width="1.5" PointX="7.5" PointY="24.875" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.Product" Width="1.5" PointX="5.25" PointY="18.75" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.ProductColor" Width="1.5" PointX="7.5" PointY="15.625" />
         <EntityTypeShape EntityType="EcommerceProjectModel.Role" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.SubCategory" Width="1.5" PointX="5.25" PointY="19.75" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.SubCategory" Width="1.5" PointX="8.25" PointY="20.875" />
         <EntityTypeShape EntityType="EcommerceProjectModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.User" Width="1.5" PointX="0.75" PointY="15.875" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.UserAddress" Width="1.5" PointX="3" PointY="7.5" />
-        <EntityTypeShape EntityType="EcommerceProjectModel.TestMonials" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.User" Width="1.5" PointX="0.75" PointY="17.75" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.UserAddress" Width="1.5" PointX="3" PointY="38.5" />
+        <EntityTypeShape EntityType="EcommerceProjectModel.TestMonials" Width="1.5" PointX="3" PointY="18.875" />
         <AssociationConnector Association="EcommerceProjectModel.FK_AboutUs_User" />
         <AssociationConnector Association="EcommerceProjectModel.FK_AboutUs_User1" />
         <AssociationConnector Association="EcommerceProjectModel.FK_Brand_User" />
@@ -53,6 +53,7 @@
         <AssociationConnector Association="EcommerceProjectModel.FK_ProductColor_User1" />
         <AssociationConnector Association="EcommerceProjectModel.FK_SubCategory_User" />
         <AssociationConnector Association="EcommerceProjectModel.FK_SubCategory_User1" />
+        <AssociationConnector Association="EcommerceProjectModel.FK_TestMonials_User" />
         <AssociationConnector Association="EcommerceProjectModel.FK_User_User" />
         <AssociationConnector Association="EcommerceProjectModel.FK_User_User1" />
         <AssociationConnector Association="EcommerceProjectModel.FK_UserAddress_User" />

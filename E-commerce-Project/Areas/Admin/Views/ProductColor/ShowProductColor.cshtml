@@ -24,13 +24,8 @@
                 {
                     <tbody>
                         <tr>
-                            <td>@item.ColorFk</td>
-                            <td>@item.ProductFK</td>
-                            <td>@item.Image</td>
-                            <td>@item.CreatedBy</td>
-                            <td>@item.CreationDate</td>
-                            <td>@item.UpdatedBy</td>
-                            <td>@item.UpdatedDate</td>
+                            <td>@item.Product.Name</td>
+                            <td>@item.Color.Name</td>
                             <td>
                                 <button class="btn btn-warning" onclick="Detaile(@item.ID)">Detalis</button>
                                 <button class="btn btn-info" onclick="EditAbout(@item.ID)">Edit</button>

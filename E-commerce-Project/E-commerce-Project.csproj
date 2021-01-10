@@ -140,13 +140,19 @@
     <Compile Include="Areas\Admin\Controllers\ProductColorController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoryController.cs" />
-    <Compile Include="Areas\Admin\Controllers\TestimonialsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserAddressController.cs" />
     <Compile Include="Common1\CommonEnum.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductDetailesController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\AboutUSDAL.cs" />
+    <Compile Include="DAL\AutherizationDAL.cs" />
     <Compile Include="DAL\BrandDAL.cs" />
     <Compile Include="DAL\CategoryDAL.cs" />
     <Compile Include="DAL\ColorDAL.cs" />
@@ -157,7 +163,6 @@
     <Compile Include="DAL\ProductColorDAL.cs" />
     <Compile Include="DAL\ProductDAL.cs" />
     <Compile Include="DAL\SubCategoryDAL.cs" />
-    <Compile Include="DAL\TestimonialsDAL.cs" />
     <Compile Include="DAL\UserAddressDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="Global.asax.cs">
@@ -2079,7 +2084,8 @@
     <Content Include="Customs\webfont\fontawesome\webfonts\fa-solid-900.woff2" />
     <Content Include="Areas\Admin\Views\Testimonials\TestMonDetailes.cshtml" />
     <Content Include="Areas\Admin\Views\Testimonials\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Testimonials\AddTestMonials.cshtml" />
+    <Content Include="Areas\Admin\Views\ContactMessage\ContactMessageTable.cshtml" />
+    <Content Include="Areas\Admin\Views\ContactMessage\Form.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2117,6 +2123,22 @@
     <Content Include="Views\Home\Product.cshtml" />
     <Content Include="Views\Home\Brand.cshtml" />
     <Content Include="Views\Home\CategoryProduct.cshtml" />
+    <Content Include="Views\Home\Testmonial.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Contact\ContactMessage.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contact\ContactUs.cshtml" />
+    <Content Include="Views\Contact\Map.cshtml" />
+    <Content Include="Views\Shop\products.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Shop\category.cshtml" />
+    <Content Include="Views\Shop\brands.cshtml" />
+    <Content Include="Views\Shop\filterByColor.cshtml" />
+    <Content Include="Views\Shop\filterByPrice.cshtml" />
+    <Content Include="Views\ProductDetailes\Index.cshtml" />
+    <Content Include="Views\Cart\CartItems.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Checkout\BillingDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

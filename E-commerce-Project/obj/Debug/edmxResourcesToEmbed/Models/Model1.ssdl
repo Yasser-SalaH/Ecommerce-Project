@@ -171,6 +171,7 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
     <Key>
       <PropertyRef Name="ID" />
       <PropertyRef Name="Image" />
+      <PropertyRef Name="IsConfirm" />
       <PropertyRef Name="CreatedBy" />
       <PropertyRef Name="CreationDate" />
       <PropertyRef Name="UserFK" />
@@ -178,11 +179,11 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
     <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Image" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="FeedBack" Type="nvarchar" MaxLength="2000" />
-    <Property Name="IsConfirm" Type="bit" />
+    <Property Name="IsConfirm" Type="bit" Nullable="false" />
     <Property Name="CreatedBy" Type="bigint" Nullable="false" />
     <Property Name="CreationDate" Type="datetime" Nullable="false" />
     <Property Name="UpdateBy" Type="bigint" />
-    <Property Name="UpdateDate" Type="nchar" MaxLength="10" />
+    <Property Name="UpdateDate" Type="datetime" />
     <Property Name="UserFK" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
@@ -599,6 +600,18 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TestMonials_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="TestMonials" Type="Self.TestMonials" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TestMonials">
+        <PropertyRef Name="UserFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_User_User">
     <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="User1" Type="Self.User" Multiplicity="*" />
@@ -815,6 +828,10 @@ warning 6002: The table/view 'EcommerceProject.dbo.TestMonials' does not have a 
     <AssociationSet Name="FK_SubCategory_User1" Association="Self.FK_SubCategory_User1">
       <End Role="User" EntitySet="User" />
       <End Role="SubCategory" EntitySet="SubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestMonials_User" Association="Self.FK_TestMonials_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="TestMonials" EntitySet="TestMonials" />
     </AssociationSet>
     <AssociationSet Name="FK_User_User" Association="Self.FK_User_User">
       <End Role="User" EntitySet="User" />

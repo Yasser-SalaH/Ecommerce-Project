@@ -19,9 +19,13 @@
                     <tbody>
                        @foreach (var item in Model)
                         {
-                          <tr>
-                             <td>@item.Name</td>
-                            <td>@item.Code</td>
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>
+                                <ul>
+                                    <li style="list-style-type:square; background-color: @item.Code"></li>
+                                </ul>
+                            </td>
                             <td>@item.CreationDate</td>
                             <td>@item.CreatedBy</td>
                             <td>@item.UpdatedBy</td>
@@ -31,7 +35,7 @@
                                 <button class="btn btn-info" onclick="EditColor(@item.ID)">Edit</button>
                                 <button class="btn btn-danger" onclick="DeleteColor(@item.ID)">Delete</button>
                             </td>
-                          </tr>
+                        </tr>
                         }
                     </tbody>
                 </table>

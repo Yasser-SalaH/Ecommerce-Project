@@ -40,6 +40,7 @@ namespace E_commerce_Project.Models
             this.ProductColor1 = new HashSet<ProductColor>();
             this.SubCategory = new HashSet<SubCategory>();
             this.SubCategory1 = new HashSet<SubCategory>();
+            this.TestMonials = new HashSet<TestMonials>();
             this.User1 = new HashSet<User>();
             this.User11 = new HashSet<User>();
             this.UserAddress = new HashSet<UserAddress>();
@@ -106,6 +107,8 @@ namespace E_commerce_Project.Models
         public virtual ICollection<SubCategory> SubCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubCategory> SubCategory1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TestMonials> TestMonials { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> User1 { get; set; }
         public virtual User User2 { get; set; }

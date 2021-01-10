@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- start page baner section  -->
+<section class="page-baner">
+    <div class="container">
+        <div class="page-baner-content text-center">
+            <h5>Contact Us</h5>
+            <div class="baner-link">
+                <span><a href="~/Home">Home / </a></span>
+                <span><a href="">Contact Us</a></span>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    @Html.Action("ContactUs")
+</section>
+<section>
+    <div id="contact-form">
+        @Html.Action("ContactMessage")
+        </div>
+</section>
+<section>
+    @Html.Action("Map")
+</section>
+<script>
+    function OnSuccess(data) {
+        if (data.done) {
+            var message = '<p class="alert alert-success">Message sent successfully</p>';
+            $('#alert').html(message);
+            Add();
+        } else {
+            alert("Error in sending Message");
+        }
+    }
+    function Add() {
+        $.ajax({
+            url: "/Contact/ContactMessage",
+            method: "GET"
+        }).done(function (data) {
+            $('#contact-form').html(data);
+        }).fail(function (data) {
+        });
+    }
+    function OnFailure(data) {
+    }
+</script>

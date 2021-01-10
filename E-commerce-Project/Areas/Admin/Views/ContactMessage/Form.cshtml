@@ -1,0 +1,17 @@
+﻿@model E_commerce_Project.ViewModel.ContactMessageVM
+
+@using (Ajax.BeginForm("formName",
+    new AjaxOptions { OnSuccess = "onSuccess", OnFailure = "onFailure" }))
+{
+    @Html.LabelFor(z => z.Name)
+    @Html.TextBoxFor(z => z.Name, new { @class = "form-control" })
+
+    @Html.LabelFor(z => z.Email)
+    @Html.TextBoxFor(z => z.Email, new { @class = "form-control" })
+
+    @Html.LabelFor(z => z.Message)
+    @Html.TextAreaFor(z => z.Message, new { @class = "form-control" })
+
+    @Html.LabelFor(z => z.Answer)
+    @Html.CheckBoxFor(z => z.Answer)
+
