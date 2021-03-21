@@ -1,4 +1,4 @@
-# Ecommerse-Project Website(ASP.NET MVC ,SQL Server)
+# Ecommerse-Project Website(ASP.NET MVC ,C#, SQL Server)
 ## My Frist Project 
 it contains Two Types Of Users (Admin,customers)
 + **The Admin** Can Use The Website to Repesent The Products And Manage The Website.
@@ -13,6 +13,14 @@ If you want to try using this website, you need to have SQL server management su
 # Notes 
 + The project has not been finished yet
 + **"EcommerceProject.sql"** file is updataed every database update, so make sure to run the file on the database to get the updated.
-
-
-
+# Project Snapshots
+<img src="imgs/I1.png" width="750">
+<img src="imgs/I2.png" width="750">
+<img src="imgs/I3.png" width="750">
+<img src="imgs/I4.png" width="750">
+<img src="imgs/I5.png" width="750">
+<img src="imgs/I6.png" width="750">
+<img src="imgs/I7.png" width="750">
+<img src="imgs/I8.png" width="720">
+<img src="imgs/I9.png" width="720">
+<img src="imgs/I10.png" width="720">
